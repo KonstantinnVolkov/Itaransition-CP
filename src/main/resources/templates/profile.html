@@ -30,6 +30,7 @@
     <div class="container">
         <div class="main-body">
             <div class="row gutters-sm">
+
                 <!-- User's info-->
                 <div class="col-md-4 mb-3">
                     <div class="card">
@@ -47,7 +48,47 @@
                 </div>
                 <!-- User's info-->
 
+
+                <div class="col-md-8">
+                    <form method="post"action="#">
+                    <div class="card mb-3">
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Tag</h6>
+                                </div>
+                                <input class="col-sm-9 text-secondary" name="tag">
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Theme</h6>
+                                </div>
+                                <input class="col-sm-9 text-secondary" name="theme" >
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0">Topic</h6>
+                                </div>
+                                <div class="col-sm-9 text-secondary">
+                                    <input type="text" name="body">
+                                </div>
+                            </div>
+                            <hr>
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit">Create</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </form>
+                </div>
+                </div>
+
                 <!-- User's posts-->
+                <form th:each="post: ${posts}">
                 <div class="col-md-8">
                     <div class="card mb-3">
                         <div class="card-body">
@@ -55,8 +96,8 @@
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Tag</h6>
                                 </div>
-                                <div class="col-sm-9 text-secondary">
-                                    Games
+                                <div class="col-sm-9 text-secondary" th:text="post.tags">
+                                    Empty
                                 </div>
                             </div>
                             <hr>
@@ -64,8 +105,8 @@
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Theme</h6>
                                 </div>
-                                <div class="col-sm-9 text-secondary">
-                                    Cyberpunk 2077
+                                <div class="col-sm-9 text-secondary" th:text="post.theme">
+                                    Empty
                                 </div>
                             </div>
                             <hr>
@@ -73,8 +114,8 @@
                                 <div class="col-sm-3">
                                     <h6 class="mb-0">Title</h6>
                                 </div>
-                                <div class="col-sm-9 text-secondary">
-                                    Bugs after release
+                                <div class="col-sm-9 text-secondary" th:text="post.header">
+                                    Empty
                                 </div>
                             </div>
                             <hr>
@@ -95,6 +136,7 @@
                         </div>
                     </div>
                 </div>
+                </form>
                 <!-- User's posts-->
             </div>
         </div>

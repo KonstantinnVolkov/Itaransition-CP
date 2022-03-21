@@ -21,12 +21,19 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+        String[] staticResources  =  {
+                "/css/**",
+                "/images/**",
+                "/fonts/**",
+                "/scripts/**",
+        };
         http
                 .authorizeRequests()
-                .antMatchers("/feed/**").permitAll()
+                .antMatchers(staticResources).permitAll()
+                .antMatchers("/feed/**/").permitAll()
                 .antMatchers("/registration/**").permitAll()
                 .antMatchers("/admin_panel/**").hasAuthority("ADMIN")
-                .antMatchers("/profile/**").authenticated()
+                .antMatchers("/profile/**/").authenticated()
                 .and()
                 .formLogin()
                 .usernameParameter("userName")
@@ -43,5 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder);
     }
+
+
 
 }

@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
 @Table(name = "users")
@@ -38,6 +39,10 @@ public class User {
     @Column(name = "state")
     @Enumerated(value = EnumType.STRING)
     private State state;
+
+//    @OneToMany(mappedBy = "user")
+//    private Collection<Post> posts;
+
 
 //    @Column(name = "provider")
 //    @Enumerated(value = EnumType.STRING)
