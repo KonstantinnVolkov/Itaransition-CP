@@ -18,7 +18,6 @@ public class ProfileController {
 
     private final PostService postService;
     private final PostRepository postRepository;
-
     private final UserRepository userRepository;
 
     @Autowired
@@ -33,7 +32,9 @@ public class ProfileController {
         String username = request.getParameter("username");
         String user_id = request.getParameter("id");
         model.addAttribute("username", username);
-//        model.addAttribute("posts", postRepository.findByAuthor(Long.parseLong(user_id)));
+        System.out.println(postRepository.findByAuthor_Id(Long.parseLong(user_id)));
+        model.addAttribute("posts", postRepository.findByAuthor_Id(Long.parseLong(user_id)));
+        System.out.println("hello");
         return "profile";
     }
 

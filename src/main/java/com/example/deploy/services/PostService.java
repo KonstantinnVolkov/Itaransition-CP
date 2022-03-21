@@ -7,6 +7,8 @@ import com.example.deploy.repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
+
 @Service
 public class PostService {
 
@@ -24,6 +26,7 @@ public class PostService {
         post.setTheme(postForm.getTheme());
         post.setBody(postForm.getBody());
         post.setRate(0D);
+        post.setPosted(new Date());
         postRepository.save(post);
     }
 }

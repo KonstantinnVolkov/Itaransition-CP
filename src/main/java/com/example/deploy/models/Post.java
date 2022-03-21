@@ -17,7 +17,7 @@ import java.util.Date;
 public class Post {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long post_id;
 
     @ManyToOne(fetch = FetchType.EAGER)
@@ -37,6 +37,7 @@ public class Post {
     private Date posted;
 
     @Column(name = "rate")
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Double rate;
 
 }

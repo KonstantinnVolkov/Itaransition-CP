@@ -13,7 +13,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     List<Post> findAll();
     List<Post> findByTag(String tag);
 
-    List<Post> findByAuthor(Long author_id);
+    List<Post> findByAuthor_Id(Long authorID);
 
 
 }
