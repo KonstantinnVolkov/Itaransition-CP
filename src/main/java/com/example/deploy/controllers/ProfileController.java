@@ -7,9 +7,7 @@ import com.example.deploy.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -27,10 +25,10 @@ public class ProfileController {
         this.userRepository = userRepository;
     }
 
-    @GetMapping("/profile{id}{username}")
-    public String getProgilePage(HttpServletRequest request, Model model){
-        String username = request.getParameter("username");
-        String user_id = request.getParameter("id");
+    @GetMapping("/profile")
+    public String getProgilePage(@RequestParam("username") String username,
+                                 @RequestParam("id") String user_id,
+                                 Model model) {
         model.addAttribute("username", username);
         System.out.println(postRepository.findByAuthor_Id(Long.parseLong(user_id)));
         model.addAttribute("posts", postRepository.findByAuthor_Id(Long.parseLong(user_id)));
@@ -38,9 +36,10 @@ public class ProfileController {
         return "profile";
     }
 
-    @PostMapping("/profile{id}{username}")
-    public String savePost(@ModelAttribute PostForm postForm, HttpServletRequest request, Model model){
-        String username = request.getParameter("username");
+    @PostMapping("/profile")
+    public String savePost(@ModelAttribute PostForm postForm,
+                           @RequestParam("username") String username,
+                           Model model) {
         model.addAttribute("postForm", postForm);
         postService.save(postForm, userRepository.findByUserName(username));
         return "/feed";
