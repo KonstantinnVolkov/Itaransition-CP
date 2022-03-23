@@ -47,7 +47,7 @@ public class FeedContoller {
                 model.addAttribute("userId", userRepository.findByUserName(principal.getName()).getId());
             }
         }
-        List<Post> allPosts = postRepository.findAll();
+        List<Post> allPosts = postRepository.findAllByOrderByPostedDesc();
         model.addAttribute("allPosts", allPosts);
         return "feed";
     }

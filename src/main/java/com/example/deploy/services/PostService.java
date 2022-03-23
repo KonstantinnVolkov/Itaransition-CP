@@ -30,12 +30,4 @@ public class PostService {
         post.setPosted(new Date());
         postRepository.save(post);
     }
-
-    public List<Post> getAllPosts() {
-        return postRepository.findAll();
-    }
-
-    public List<Post> getAllUsersPosts(Long user_id) {
-        return postRepository.findAllByAuthor_Id(user_id);
-    }
 }

@@ -6,27 +6,27 @@
     <title th:text="${username}"></title>
 </head>
 <body style="background: #e1e3e6">
-    <header class="p-3 bg-dark text-white">
-        <div class="container">
-            <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
-                <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                    <li><a href="/login" class="nav-link px-2 text-secondary">Feed</a></li>
-                    <li><a href="/admin_panel" class="nav-link px-2 text-white">Admin's tools</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">Books</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">Games</a></li>
-                    <li><a href="#" class="nav-link px-2 text-white">Food</a></li>
-                </ul>
 
-                <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                    <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
-                </form>
+<header class="p-3 bg-dark text-white">
+    <div class="container">
+        <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                <li><a th:href="@{/feed}" class="nav-link px-2 text-secondary">Feed</a></li>
+                <li><a href="/admin_panel" class="nav-link px-2 text-white">Admin's tools</a></li>
+                <li><a href="#" class="nav-link px-2 text-white">Books</a></li>
+                <li><a href="#" class="nav-link px-2 text-white">Games</a></li>
+                <li><a href="#" class="nav-link px-2 text-white">Food</a></li>
+            </ul>
 
-                <div class="text-end">
-                    <a href="/logout"> <button type="button" class="btn btn-warning me-2">Logout</button></a>
-                </div>
+            <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
+                <input type="search" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+            </form>
+            <div class="text-end">
+                <a href="/logout"> <button type="button" class="btn btn-warning me-2">Logout</button></a>
             </div>
         </div>
-    </header>
+    </div>
+</header>
     <div class="container">
         <div class="main-body">
             <div class="row gutters-sm">
@@ -47,29 +47,29 @@
                 <!-- User's info-->
 
                 <!-- Create post-->
-                <div class="col-md-8 mt-3">
+                <div class="col-md-8 mt-3" th:if="${isEditEnabled}">
                     <form method="post"action="#">
-                    <div class="card mb-3 card">
+                    <div class="card mb-3">
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Tag</h6>
+                                    <h6 class="mb-0 text-secondary">Tag</h6>
                                 </div>
-                                <input class="col-sm-9 text-secondary" name="tag">
+                                <input class="col-sm-9" name="tag">
                             </div>
                             <hr>
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Theme</h6>
+                                    <h6 class="mb-0 text-secondary">Theme</h6>
                                 </div>
-                                <input class="col-sm-9 text-secondary" name="theme" >
+                                <input class="col-sm-9" name="theme" >
                             </div>
                             <hr>
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Topic</h6>
+                                    <h6 class="mb-0 text-secondary">Topic</h6>
                                 </div>
-                                    <textarea class="col-sm-9 text-secondary" rows="3" name="body"></textarea>
+                                    <textarea class="col-sm-9" rows="3" name="body"></textarea>
                             </div>
                             <div class="row">
                                 <form action="/upload" class="dropzone needsclick" id="demo-upload">
@@ -101,31 +101,32 @@
                         <div class="card-body">
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Tag</h6>
+                                    <h6 class="mb-0 text-secondary">Tag</h6>
                                 </div>
-                                <div class="col-sm-9 text-secondary" th:text="post.tag">
+                                <div class="col-sm-9" th:text="${post.tag}">
                                     Empty
                                 </div>
                             </div>
                             <hr>
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Theme</h6>
+                                    <h6 class="mb-0 text-secondary">Theme</h6>
                                 </div>
-                                <div class="col-sm-9 text-secondary" th:text="post.theme"></div>
+                                <div class="col-sm-9" th:text="${post.theme}"></div>
                             </div>
                             <hr>
                             <div class="row">
                                 <div class="col-sm-3">
-                                    <h6 class="mb-0">Topic</h6>
+                                    <h6 class="mb-0 text-secondary">Topic</h6>
                                 </div>
-                                <div class="col-sm-9 text-secondary" th:text="post.body"></div>
+                                <div class="col-sm-9" th:text="${post.body}"></div>
                             </div>
                             <hr>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <form method="post" action="?">
+                                    <form method="post" action="">
                                         <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit">Save</button>
+                                        <button class="btn btn-danger btn-login text-uppercase fw-bold" type="submit">Delete</button>
                                     </form>
                                 </div>
                             </div>
