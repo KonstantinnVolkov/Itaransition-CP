@@ -15,14 +15,14 @@ import java.util.Date;
 public class Post {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.TABLE)
     private Long post_id;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "author_id")
     private User author;
 
-    @Column(name = "tags")
+    @Column(name = "tag")
     private String tag;
 
     @Column(name = "theme")
