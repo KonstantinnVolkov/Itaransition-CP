@@ -23,7 +23,7 @@ public class PostService {
     public void save(PostForm postForm, User user) {
         Post post = new Post();
         post.setAuthor(user);
-        post.setTag(postForm.getTag());
+        post.setTags(postForm.getTags());
         post.setTheme(postForm.getTheme());
         post.setBody(postForm.getBody());
         post.setRate(0D);

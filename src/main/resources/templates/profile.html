@@ -55,14 +55,14 @@
                                 <div class="col-sm-3">
                                     <h6 class="mb-0 text-secondary">Tag</h6>
                                 </div>
-                                <input class="col-sm-9" name="tag">
+                                <input class="col-sm-9" name="tags">
                             </div>
                             <hr>
                             <div class="row">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0 text-secondary">Theme</h6>
                                 </div>
-                                <input class="col-sm-9" name="theme" >
+                                <input class="col-sm-9" name="theme">
                             </div>
                             <hr>
                             <div class="row">
@@ -103,7 +103,7 @@
                                 <div class="col-sm-3">
                                     <h6 class="mb-0 text-secondary">Tag</h6>
                                 </div>
-                                <div class="col-sm-9" th:text="${post.tag}">
+                                <div class="col-sm-9" th:text="${post.tags}">
                                     Empty
                                 </div>
                             </div>
@@ -125,8 +125,8 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <form method="post" action="">
-                                        <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit">Save</button>
-                                        <button class="btn btn-danger btn-login text-uppercase fw-bold" type="submit">Delete</button>
+                                        <button th:if="${isEditEnabled}" class="btn btn-primary btn-login text-uppercase fw-bold" type="submit">Save</button>
+                                        <button th:if="${isEditEnabled}" class="btn btn-danger btn-login text-uppercase fw-bold" type="submit">Delete</button>
                                     </form>
                                 </div>
                             </div>

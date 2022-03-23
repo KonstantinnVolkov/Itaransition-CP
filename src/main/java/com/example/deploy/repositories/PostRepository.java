@@ -12,7 +12,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
 
     List<Post> findAllByAuthor_Id(Long author_id);
     List<Post> findAllByOrderByPostedDesc();
-    List<Post> findByTag(String tag);
+    List<Post> findByTags(String tag);
 
 //    List<Post> findByAuthor_Id(Long authorID);
 

@@ -53,6 +53,6 @@ public class ProfileController {
                            Model model) {
         model.addAttribute("postForm", postForm);
         postService.save(postForm, userRepository.findByUserName(username));
-        return "/feed";
+        return "redirect:/feed";
     }
 }

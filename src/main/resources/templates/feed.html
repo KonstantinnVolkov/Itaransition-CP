@@ -47,14 +47,15 @@
                             <div class="col-sm-3">
                                 <h6 class="mb-0 text-secondary">Author</h6>
                             </div>
-                            <div class="col-sm-9" th:text="${post.author.userName}">Username</div>
+                            <a class="col-sm-9" th:text="${post.author.userName}"
+                               th:href="@{/profile(id=${post.author.id}, username=${post.author.userName})}">Username</a>
                         </div>
                         <hr>
                         <div class="row">
                             <div class="col-sm-3">
                                 <h6 class="mb-0 text-secondary">Tag</h6>
                             </div>
-                            <div class="col-sm-9" th:text="${post.tag}">Tag</div>
+                            <div class="col-sm-9" th:text="${post.tags}">Tag</div>
                         </div>
                         <hr>
                         <div class="row">

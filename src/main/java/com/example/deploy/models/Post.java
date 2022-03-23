@@ -22,8 +22,8 @@ public class Post {
     @JoinColumn(name = "author_id")
     private User author;
 
-    @Column(name = "tag")
-    private String tag;
+    @Column(name = "tags")
+    private String tags;
 
     @Column(name = "theme")
     private String theme;
