@@ -1,16 +1,15 @@
 package com.example.deploy.models;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Data
 @Table(name = "comments")
-@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class Comment {
@@ -27,8 +26,11 @@ public class Comment {
     @JoinColumn(name = "post_id")
     private Post post;
 
-    @Column(name = "message")
-    private String message;
+    @Column(name = "comment")
+    private String comment;
+
+    @Column(name = "created", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
+    private Date created;
 
 
 }

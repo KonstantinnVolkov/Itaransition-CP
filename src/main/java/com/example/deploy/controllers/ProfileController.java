@@ -30,9 +30,9 @@ public class ProfileController {
                                  @RequestParam("id") String user_id,
                                  Model model) {
         model.addAttribute("username", username);
-        System.out.println(postRepository.findByAuthor_Id(Long.parseLong(user_id)));
-        model.addAttribute("posts", postRepository.findByAuthor_Id(Long.parseLong(user_id)));
-        System.out.println("hello");
+        model.addAttribute("id", user_id);
+//        System.out.println(postRepository.findByAuthor_Id(Long.parseLong(user_id)));
+        model.addAttribute("posts", postService.getAllUsersPosts(Long.parseLong(user_id)));
         return "profile";
     }
 

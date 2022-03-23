@@ -4,5 +4,5 @@ import lombok.Data;
 
 @Data
 public class CommentForm {
-    private String message;
+    private String comment;
 }

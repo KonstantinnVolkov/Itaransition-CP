@@ -22,7 +22,7 @@ public class CommentService {
         Comment comment = new Comment();
         comment.setAuthor(author);
         comment.setPost(post);
-        comment.setMessage(commentForm.getMessage());
+        comment.setComment(commentForm.getComment());
         commentRepository.save(comment);
     }
 

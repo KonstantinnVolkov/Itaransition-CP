@@ -1,13 +1,11 @@
 package com.example.deploy.models;
 
-import com.example.deploy.forms.UserForm;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Collection;
 
 @Entity
 @Table(name = "users")
@@ -39,21 +37,4 @@ public class User {
     @Column(name = "state")
     @Enumerated(value = EnumType.STRING)
     private State state;
-
-//    @OneToMany(mappedBy = "user")
-//    private Collection<Post> posts;
-
-
-//    @Column(name = "provider")
-//    @Enumerated(value = EnumType.STRING)
-//    private Provider provider;
-
-    public static User form (UserForm form){
-        return User.builder()
-                .email(form.getEmail())
-                .userName(form.getUserName())
-                .password(form.getPassword())
-                .confirmPassword(form.getConfirmPassword())
-                .build();
-    }
 }
