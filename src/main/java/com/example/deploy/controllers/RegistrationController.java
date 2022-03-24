@@ -27,8 +27,6 @@ public class RegistrationController {
 
     @PostMapping("/registration")
     public String registration(UserForm userForm){
-        System.out.println("pass: " + userForm.getPassword());
-        System.out.println("confirm pass: " + userForm.getConfirmPassword());
         registrationService.register(userForm);
         return "redirect:/login";
     }

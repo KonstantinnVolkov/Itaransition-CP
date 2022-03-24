@@ -1,6 +1,7 @@
 package com.example.deploy.controllers;
 
 import com.example.deploy.forms.PostForm;
+import com.example.deploy.models.Post;
 import com.example.deploy.models.Role;
 import com.example.deploy.models.User;
 import com.example.deploy.repositories.PostRepository;
@@ -29,30 +30,20 @@ public class ProfileController {
 
     @GetMapping("/profile")
     public String getProgilePage(@RequestParam("username") String username,
-                                 @RequestParam("id") String user_id,
+                                 @RequestParam("id") long user_id,
                                  Model model,
                                  Principal principal) {
         model.addAttribute("username", username);
         model.addAttribute("id", user_id);
-        User profileUser = userRepository.findByUserName(username);    //Забираем пользователя профиля
         User currentUser = userRepository.findByUserName(principal.getName());  //Забираем текущего залогиненого пользователя
-        if ( currentUser.getRole().equals(Role.ADMIN) ||        //Может ли пользователь редактировать и создавать свои и чужие посты
-                (currentUser.getUserName().equals(username) && String.valueOf(currentUser.getId()).equals(user_id)) ) {
+        if (currentUser.getRole().equals(Role.ADMIN) ||        //Может ли пользователь редактировать и создавать свои и чужие посты
+                (currentUser.getUserName().equals(username) && currentUser.getId().equals(user_id))) {
             model.addAttribute("isEditEnabled", true);
         }
         else {
             model.addAttribute("isEditEnabled", false);
         }
-        model.addAttribute("posts", postRepository.findAllByAuthor_Id(Long.parseLong(user_id)));
+        model.addAttribute("posts", postRepository.findAllByAuthor_Id(user_id));
         return "profile";
-    }
-
-    @PostMapping("/profile")
-    public String savePost(@ModelAttribute PostForm postForm,
-                           @RequestParam("username") String username,
-                           Model model) {
-        model.addAttribute("postForm", postForm);
-        postService.save(postForm, userRepository.findByUserName(username));
-        return "redirect:/feed";
     }
 }

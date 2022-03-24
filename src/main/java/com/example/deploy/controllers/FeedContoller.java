@@ -11,6 +11,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
 import java.util.List;
@@ -32,10 +33,7 @@ public class FeedContoller {
         this.commentRepository = commentRepository;
     }
 
-    //Post has to keep comments, not comment keep post
-    //Rewrite posts and comments DB
-
-    @GetMapping("/feed")
+    @RequestMapping("/feed")
     public String getFeedPage(Model model, Principal principal,
                               Authentication authentication) {
         boolean isAuthenticated;

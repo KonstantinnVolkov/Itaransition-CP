@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Optional;
 
 @Repository
 public interface PostRepository extends JpaRepository<Post, Long> {
@@ -13,8 +14,5 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     List<Post> findAllByAuthor_Id(Long author_id);
     List<Post> findAllByOrderByPostedDesc();
     List<Post> findByTags(String tag);
-
-//    List<Post> findByAuthor_Id(Long authorID);
-
-
+    Post findPostByAuthorAndAndBody(User author, String body);
 }
