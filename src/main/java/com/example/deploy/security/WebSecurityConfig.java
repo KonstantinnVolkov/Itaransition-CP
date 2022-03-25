@@ -9,8 +9,30 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    private static final String[] FOR_ADMINS = {
+            "/deletePost/**",
+            "/postEditor/**",
+            "/admin_panel/**",
+            "/makeAdmin/**",
+            "/blockUser/**",
+            "/deleteUser/**"
+    };
+
+    private static final String[] staticResources  =  {
+            "/css/**",
+            "/images/**",
+            "/fonts/**",
+            "/scripts/**",
+    };
+
 
     private final PasswordEncoder passwordEncoder;
     private final UserDetailsService userDetailsService;
@@ -22,21 +44,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        String[] staticResources  =  {
-                "/css/**",
-                "/images/**",
-                "/fonts/**",
-                "/scripts/**",
-        };
         http
                 .authorizeRequests()
                 .antMatchers(staticResources).permitAll()
                 .antMatchers("/feed/**/").permitAll()
                 .antMatchers("/registration/**").permitAll()
-                .antMatchers("/admin_panel/**").hasAuthority("ADMIN")
                 .antMatchers("/profile/**/").authenticated()
-                .antMatchers("/postEditor/**").hasAuthority("ADMIN")
-                .antMatchers("/deletePost/**").hasAuthority("ADMIN")
+                .antMatchers(FOR_ADMINS).hasAuthority("ADMIN")
                 .and()
                 .formLogin()
                 .usernameParameter("userName")

@@ -75,6 +75,9 @@
                                 <textarea class="col-sm-9" rows="3" name="body" required></textarea>
                             </div>
                             <hr>
+
+
+                            <hr>
                             <div class="row">
                                 <div class="col-sm-12">
                                     <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit" name="create">Create</button>
@@ -125,6 +128,36 @@
                                     </a>
                                 </div>
                             </div>
+                            <hr>
+                            <!--  Comments  -->
+                            <div class="row">
+                                <div class="col-sm-12">
+                                    <div class="col-sm-3">
+                                        <h6 class="mb-0 text-secondary">Comments</h6>
+                                    </div>
+                                    <div class="card mb-4 mt-3">
+                                        <div class="card-body">
+                                            <div >
+                                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp"
+                                                     alt="avatar" width="25" height="25"
+                                                />
+                                                <a th:text="${post.author.userName}"
+                                                   th:href="@{/profile(id=${post.author.id}, username=${post.author.userName})}">
+                                                </a>
+                                            </div>
+                                            <p class="mt-2">Type your note, and hit enter to add it</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div>
+                                <div>
+                                    <div class="form-outline mb-4 mt-1">
+                                        <input type="text" id="addANote" class="form-control" placeholder="Type comment..."/>
+                                    </div>
+                                </div>
+                            </div>
+                            <!--  Comments  -->
                         </div>
                     </div>
                 </div>

@@ -25,15 +25,16 @@
                                 <label for="email" th:utext="#{email}"></label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="userName" class="form-control" id="userName" name="userName" placeholder="Username">
+                                <input type="userName" class="form-control" id="userName" name="userName" placeholder="Username" required>
                                 <label for="userName" th:utext="#{userName}"></label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                                <input type="password" class="form-control" id="password" name="password" placeholder="Password" required>
                                 <label for="password" th:utext="#{password}"></label>
                             </div>
                             <div class="form-floating mb-3">
-                                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password">
+                                <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password"
+                                       oninput="check(this)" required>
                                 <label for="confirmPassword" th:utext="#{confirmPassword}"></label>
                             </div>
                             <div class="d-grid">
@@ -65,5 +66,15 @@
             }
         });
     });
+</script>
+<script type='text/javascript'>
+    function check(input) {
+        if (input.value != document.getElementById('password').value) {
+            input.setCustomValidity('Password Must be Matching.');
+        } else {
+            input.setCustomValidity('');
+        }
+    }
+</script>
 </body>
 </html>
