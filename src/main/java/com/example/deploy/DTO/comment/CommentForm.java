@@ -1,4 +1,4 @@
-package com.example.deploy.forms;
+package com.example.deploy.DTO.comment;
 
 import lombok.Data;
 

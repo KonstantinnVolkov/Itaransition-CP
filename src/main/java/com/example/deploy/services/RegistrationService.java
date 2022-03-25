@@ -1,8 +1,8 @@
 package com.example.deploy.services;
 
-import com.example.deploy.forms.UserForm;
+import com.example.deploy.DTO.user.UserRegistrationDTO;
 
 public interface RegistrationService {
 
-    void register(UserForm userForm);
+    void register(UserRegistrationDTO userRegistrationDTO);
 }

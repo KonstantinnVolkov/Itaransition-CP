@@ -1,12 +1,9 @@
 package com.example.deploy.controllers;
 
-import com.example.deploy.forms.PostForm;
-import com.example.deploy.models.Post;
 import com.example.deploy.models.Role;
 import com.example.deploy.models.User;
-import com.example.deploy.repositories.PostRepository;
-import com.example.deploy.repositories.UserRepository;
-import com.example.deploy.services.PostService;
+import com.example.deploy.services.PostServiceImpl;
+import com.example.deploy.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,15 +14,13 @@ import java.security.Principal;
 @Controller
 public class ProfileController {
 
-    private final PostService postService;
-    private final PostRepository postRepository;
-    private final UserRepository userRepository;
+    private final PostServiceImpl postService;
+    private final UserService userService;
 
     @Autowired
-    public ProfileController(PostService postService, PostRepository postRepository, UserRepository userRepository) {
+    public ProfileController(PostServiceImpl postService, UserService userService) {
         this.postService = postService;
-        this.postRepository = postRepository;
-        this.userRepository = userRepository;
+        this.userService = userService;
     }
 
     @GetMapping("/profile")
@@ -35,7 +30,7 @@ public class ProfileController {
                                  Principal principal) {
         model.addAttribute("username", username);
         model.addAttribute("id", user_id);
-        User currentUser = userRepository.findByUserName(principal.getName());  //Забираем текущего залогиненого пользователя
+        User currentUser = userService.getUserByUsername(principal.getName());  //Забираем текущего залогиненого пользователя
         if (currentUser.getRole().equals(Role.ADMIN) ||        //Может ли пользователь редактировать и создавать свои и чужие посты
                 (currentUser.getUserName().equals(username) && currentUser.getId().equals(user_id))) {
             model.addAttribute("isEditEnabled", true);
@@ -43,7 +38,7 @@ public class ProfileController {
         else {
             model.addAttribute("isEditEnabled", false);
         }
-        model.addAttribute("posts", postRepository.findAllByAuthor_Id(user_id));
+        model.addAttribute("posts", postService.getAllPostsByAuthorId(user_id));
         return "profile";
     }
 }

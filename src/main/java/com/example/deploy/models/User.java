@@ -28,8 +28,6 @@ public class User {
     @Column(name = "password", unique = true)
     private String password;
 
-    private transient String confirmPassword;
-
     @Column(name = "role")
     @Enumerated(value = EnumType.STRING)
     private Role role;

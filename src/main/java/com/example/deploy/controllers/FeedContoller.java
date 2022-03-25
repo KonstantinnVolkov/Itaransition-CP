@@ -1,16 +1,12 @@
 package com.example.deploy.controllers;
 
-import com.example.deploy.models.Comment;
 import com.example.deploy.models.Post;
-import com.example.deploy.repositories.CommentRepository;
-import com.example.deploy.repositories.PostRepository;
-import com.example.deploy.repositories.UserRepository;
-import com.example.deploy.services.PostService;
+import com.example.deploy.services.PostServiceImpl;
+import com.example.deploy.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.security.Principal;
@@ -19,18 +15,13 @@ import java.util.List;
 @Controller
 public class FeedContoller {
 
-    private final UserRepository userRepository;
-    private final PostService postService;
-    private final PostRepository postRepository;
-    private final CommentRepository commentRepository;
+    private final PostServiceImpl postService;
+    private final UserService userService;
 
     @Autowired
-    public FeedContoller(PostService postService, PostRepository postRepository,
-                         UserRepository userRepository, CommentRepository commentRepository) {
+    public FeedContoller(PostServiceImpl postService, UserService userService) {
         this.postService = postService;
-        this.postRepository = postRepository;
-        this.userRepository = userRepository;
-        this.commentRepository = commentRepository;
+        this.userService = userService;
     }
 
     @RequestMapping("/feed")
@@ -42,10 +33,10 @@ public class FeedContoller {
             model.addAttribute("authentication", isAuthenticated);
             if (isAuthenticated) {
                 model.addAttribute("username", principal.getName());
-                model.addAttribute("userId", userRepository.findByUserName(principal.getName()).getId());
+                model.addAttribute("userId", userService.getUserByUsername(principal.getName()).getId());
             }
         }
-        List<Post> allPosts = postRepository.findAllByOrderByPostedDesc();
+        List<Post> allPosts = postService.getPostByDateDesc();
         model.addAttribute("allPosts", allPosts);
         return "feed";
     }

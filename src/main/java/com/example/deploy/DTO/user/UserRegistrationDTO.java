@@ -1,12 +1,10 @@
-package com.example.deploy.forms;
+package com.example.deploy.DTO.user;
 
 import lombok.Data;
 
 @Data
-public class UserForm {
-
+public class UserRegistrationDTO {
     private String email;
     private String userName;
     private String password;
-    private transient String confirmPassword;
 }

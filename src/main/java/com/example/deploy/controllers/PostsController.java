@@ -1,10 +1,9 @@
 package com.example.deploy.controllers;
 
-import com.example.deploy.forms.PostForm;
+import com.example.deploy.DTO.post.PostDTO;
 import com.example.deploy.models.Post;
-import com.example.deploy.repositories.PostRepository;
-import com.example.deploy.repositories.UserRepository;
-import com.example.deploy.services.PostService;
+import com.example.deploy.services.PostServiceImpl;
+import com.example.deploy.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,23 +12,21 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class PostsController {
 
-    private final PostService postService;
-    private final PostRepository postRepository;
-    private final UserRepository userRepository;
+    private final PostServiceImpl postService;
+    private final UserService userService;
 
     @Autowired
-    public PostsController(PostService postService, PostRepository postRepository, UserRepository userRepository) {
+    public PostsController(PostServiceImpl postService, UserService userService) {
         this.postService = postService;
-        this.postRepository = postRepository;
-        this.userRepository = userRepository;
+        this.userService = userService;
     }
 
     @PostMapping(value = "/profile", params = "create")
-    public String savePost(@ModelAttribute PostForm postForm,
+    public String savePost(@ModelAttribute PostDTO postForm,
                            @RequestParam("username") String username,
                            Model model) {
         model.addAttribute("postForm", postForm);
-        postService.save(postForm, userRepository.findByUserName(username));
+        postService.save(postForm, userService.getUserByUsername(username));
         return "redirect:/feed";
     }
 
