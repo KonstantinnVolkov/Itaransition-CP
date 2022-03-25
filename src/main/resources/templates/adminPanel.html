@@ -45,10 +45,10 @@
             <tr th:each="user: ${allUsers}">
                 <td th:text="${user.id}">id</td>
                 <td th:text="${user.email}">Email</td>
-                <td th:text="${user.userName}">Username</td>
+                <td th:text="${user.username}">Username</td>
                 <td th:text="${user.role}">Role</td>
                 <td th:text="${user.state}">State</td>
-                <td><a th:href="@{/profile(id=${user.id}, username=${user.userName})}">Go to profile</a></td>
+                <td><a th:href="@{/profile(id=${user.id}, username=${user.username})}">Go to profile</a></td>
                 <td>
                     <a th:href="@{/makeAdmin(id=${user.id})}"> <button type="button" class="btn btn-primary me-2 btn-sm btn-block">Make Admin</button></a><br>
                     <a th:href="@{/blockUser(id=${user.id})}"> <button type="button" class="btn btn-warning me-2 btn-sm btn-block mt-2">Block</button></a>

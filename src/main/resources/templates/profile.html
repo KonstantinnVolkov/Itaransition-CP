@@ -6,7 +6,7 @@
           rel="stylesheet"
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
           crossorigin="anonymous">
-    <title th:text="${username}"></title>
+    <title th:text="${user.username}"></title>
 </head>
 <body style="background: #e1e3e6">
 
@@ -15,7 +15,7 @@
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <li><a th:href="@{/feed}" class="nav-link px-2 text-secondary">Feed</a></li>
-                <li><a href="/admin_panel" class="nav-link px-2 text-white">Admin's tools</a></li>
+                <li><a th:href="@{/admin_panel}" class="nav-link px-2 text-white">Admin's tools</a></li>
                 <li><a href="#" class="nav-link px-2 text-white">Books</a></li>
                 <li><a href="#" class="nav-link px-2 text-white">Games</a></li>
                 <li><a href="#" class="nav-link px-2 text-white">Food</a></li>
@@ -41,7 +41,7 @@
                         <div class="d-flex flex-column align-items-center text-center">
                             <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150">
                             <div class="mt-3">
-                                <h4 th:text="${username}"></h4>
+                                <h4 th:text="${user.username}"></h4>
                             </div>
                         </div>
                     </div>
@@ -74,9 +74,6 @@
                                 </div>
                                 <textarea class="col-sm-9" rows="3" name="body" required></textarea>
                             </div>
-                            <hr>
-
-
                             <hr>
                             <div class="row">
                                 <div class="col-sm-12">
@@ -117,12 +114,12 @@
                             <div class="row">
                                 <div class="col-sm-12">
                                     <a th:if="${isEditEnabled}"
-                                       th:href="@{/postEditor(id=${post.author.id}, username=${post.author.userName}, postId=${post.post_id})}"
+                                       th:href="@{/postEditor(id=${user.user_id}, username=${user.username}, postId=${post.post_id})}"
                                        type="submit"
                                        class="btn btn-primary btn-login text-uppercase fw-bold">Edit
                                     </a>
                                     <a th:if="${isEditEnabled}"
-                                       th:href="@{/deletePost(id=${post.author.id}, username=${post.author.userName}, postId=${post.post_id})}"
+                                       th:href="@{/deletePost(id=${user.user_id}, username=${user.username}, postId=${post.post_id})}"
                                        class="btn btn-danger btn-login text-uppercase fw-bold"
                                         >Delete
                                     </a>
@@ -141,9 +138,9 @@
                                                 <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp"
                                                      alt="avatar" width="25" height="25"
                                                 />
-                                                <a th:text="${post.author.userName}"
-                                                   th:href="@{/profile(id=${post.author.id}, username=${post.author.userName})}">
-                                                </a>
+<!--                                                <a th:text="${post.author.userName}"-->
+<!--                                                   th:href="@{/profile(id=${user.user_id}, username=${user.username})}">-->
+<!--                                                </a>-->
                                             </div>
                                             <p class="mt-2">Type your note, and hit enter to add it</p>
                                         </div>

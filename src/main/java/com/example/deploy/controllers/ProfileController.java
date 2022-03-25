@@ -1,5 +1,7 @@
 package com.example.deploy.controllers;
 
+import com.example.deploy.mappers.PostMapper;
+import com.example.deploy.mappers.UserMapper;
 import com.example.deploy.models.Role;
 import com.example.deploy.models.User;
 import com.example.deploy.services.PostServiceImpl;
@@ -28,8 +30,6 @@ public class ProfileController {
                                  @RequestParam("id") long user_id,
                                  Model model,
                                  Principal principal) {
-        model.addAttribute("username", username);
-        model.addAttribute("id", user_id);
         User currentUser = userService.getUserByUsername(principal.getName());  //Забираем текущего залогиненого пользователя
         if (currentUser.getRole().equals(Role.ADMIN) ||        //Может ли пользователь редактировать и создавать свои и чужие посты
                 (currentUser.getUserName().equals(username) && currentUser.getId().equals(user_id))) {
@@ -38,7 +38,9 @@ public class ProfileController {
         else {
             model.addAttribute("isEditEnabled", false);
         }
-        model.addAttribute("posts", postService.getAllPostsByAuthorId(user_id));
+//        model.addAttribute("user", userService.getUserByUsername(username));
+        model.addAttribute("user", UserMapper.mapEntityToProfileDTO(userService.getUserByUsername(username)));
+        model.addAttribute("posts", PostMapper.mapEntityToDTO(postService.getAllPostsByAuthorId(user_id)));
         return "profile";
     }
 }
