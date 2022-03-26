@@ -1,4 +1,4 @@
-package com.example.deploy.services;
+package com.example.deploy.services.user;
 
 import com.example.deploy.DTO.user.UserRegistrationDTO;
 

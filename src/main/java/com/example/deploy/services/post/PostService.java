@@ -1,4 +1,4 @@
-package com.example.deploy.services;
+package com.example.deploy.services.post;
 
 import com.example.deploy.DTO.post.PostProfileDTO;
 import com.example.deploy.models.Post;

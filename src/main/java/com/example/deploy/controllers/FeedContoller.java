@@ -1,8 +1,8 @@
 package com.example.deploy.controllers;
 
 import com.example.deploy.mappers.PostMapper;
-import com.example.deploy.services.PostServiceImpl;
-import com.example.deploy.services.UserService;
+import com.example.deploy.services.post.PostServiceImpl;
+import com.example.deploy.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -35,7 +35,6 @@ public class FeedContoller {
                 model.addAttribute("userId", userService.getUserByUsername(principal.getName()).getId());
             }
         }
-//        List<Post> allPosts = postService.getPostByDateDesc();
         model.addAttribute("allPosts", PostMapper.mapEntityToFeedDTO(postService.getPostByDateDesc()));
         return "feed";
     }

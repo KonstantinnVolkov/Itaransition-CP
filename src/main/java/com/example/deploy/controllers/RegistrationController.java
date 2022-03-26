@@ -1,7 +1,7 @@
 package com.example.deploy.controllers;
 
 import com.example.deploy.DTO.user.UserRegistrationDTO;
-import com.example.deploy.services.RegistrationService;
+import com.example.deploy.services.user.RegistrationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

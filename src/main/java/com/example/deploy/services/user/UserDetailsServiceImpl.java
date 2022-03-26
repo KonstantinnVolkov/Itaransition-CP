@@ -1,4 +1,4 @@
-package com.example.deploy.services;
+package com.example.deploy.services.user;
 
 import com.example.deploy.details.UserDetailsImpl;
 import com.example.deploy.models.User;

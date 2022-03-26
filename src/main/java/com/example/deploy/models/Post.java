@@ -40,7 +40,6 @@ public class Post {
     private Collection<Comment> comments;
 
     @Column(name = "rate")
-    @GeneratedValue(strategy = GenerationType.TABLE)
     private Double rate;
 
 }

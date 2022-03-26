@@ -2,8 +2,8 @@ package com.example.deploy.controllers;
 
 import com.example.deploy.DTO.post.PostProfileDTO;
 import com.example.deploy.models.Post;
-import com.example.deploy.services.PostServiceImpl;
-import com.example.deploy.services.UserService;
+import com.example.deploy.services.post.PostServiceImpl;
+import com.example.deploy.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
