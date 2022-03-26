@@ -1,6 +1,6 @@
 package com.example.deploy.services;
 
-import com.example.deploy.DTO.post.PostDTO;
+import com.example.deploy.DTO.post.PostProfileDTO;
 import com.example.deploy.models.Post;
 import com.example.deploy.models.User;
 
@@ -11,7 +11,7 @@ public interface PostService {
     List<Post> getAllPostsByAuthorId(long user_id);
     Post getPostById(Long post_id);
     List<Post> getPostByDateDesc();
-    void save(PostDTO postForm, User user);
+    void save(PostProfileDTO postForm, User user);
     public void updatePost(Post updatedPost);
     void delete(long post_id);
 }

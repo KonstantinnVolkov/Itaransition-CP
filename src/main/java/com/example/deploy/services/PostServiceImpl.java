@@ -1,6 +1,6 @@
 package com.example.deploy.services;
 
-import com.example.deploy.DTO.post.PostDTO;
+import com.example.deploy.DTO.post.PostProfileDTO;
 import com.example.deploy.mappers.PostMapper;
 import com.example.deploy.models.Post;
 import com.example.deploy.models.User;
@@ -8,7 +8,6 @@ import com.example.deploy.repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -46,7 +45,7 @@ public class PostServiceImpl implements PostService{
     }
 
     @Override
-    public void save(PostDTO postForm, User user) {
+    public void save(PostProfileDTO postForm, User user) {
         postRepository.save(PostMapper.mapDTO_toEntity(postForm, user));
     }
 

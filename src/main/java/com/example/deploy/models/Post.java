@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.Collection;
 import java.util.Date;
 
 @Entity
@@ -33,6 +34,10 @@ public class Post {
 
     @Column(name = "posted", columnDefinition="TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
     private Date posted;
+
+    @OneToMany
+    @JoinColumn(name = "post_id")
+    private Collection<Comment> comments;
 
     @Column(name = "rate")
     @GeneratedValue(strategy = GenerationType.TABLE)

@@ -77,17 +77,17 @@
                                 <div class="col-sm-3">
                                     <h6 class="mb-0 text-secondary">Comments</h6>
                                 </div>
-                                <div class="card mb-4 mt-3">
+                                <div class="card mb-4 mt-3" th:each="comment: ${post.comments}">
                                     <div class="card-body">
                                         <div >
                                             <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp"
                                                  alt="avatar" width="25" height="25"
                                             />
-<!--                                            <a th:text="${post.author.userName}"-->
-<!--                                               th:href="@{/profile(id=${post.author.id}, username=${post.author.userName})}">-->
-<!--                                            </a>-->
+                                            <a th:text="${comment.author.userName}"
+                                               th:href="@{/profile(id=${comment.author.id}, username=${comment.author.userName})}">
+                                            </a>
                                         </div>
-                                        <p class="mt-2">Type your note, and hit enter to add it</p>
+                                        <p class="mt-2" th:text="${comment.comment}"></p>
                                     </div>
                                 </div>
                             </div>

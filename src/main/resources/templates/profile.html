@@ -110,20 +110,22 @@
                                 </div>
                                 <div class="col-sm-9" name="body" th:text="${post.body}"></div>
                             </div>
+                            <div th:if="${isEditEnabled}">
                             <hr>
                             <div class="row">
                                 <div class="col-sm-12">
-                                    <a th:if="${isEditEnabled}"
+                                    <a
                                        th:href="@{/postEditor(id=${user.user_id}, username=${user.username}, postId=${post.post_id})}"
                                        type="submit"
                                        class="btn btn-primary btn-login text-uppercase fw-bold">Edit
                                     </a>
-                                    <a th:if="${isEditEnabled}"
+                                    <a
                                        th:href="@{/deletePost(id=${user.user_id}, username=${user.username}, postId=${post.post_id})}"
                                        class="btn btn-danger btn-login text-uppercase fw-bold"
                                         >Delete
                                     </a>
                                 </div>
+                            </div>
                             </div>
                             <hr>
                             <!--  Comments  -->
@@ -132,26 +134,31 @@
                                     <div class="col-sm-3">
                                         <h6 class="mb-0 text-secondary">Comments</h6>
                                     </div>
-                                    <div class="card mb-4 mt-3">
+                                    <div class="card mb-4 mt-3" th:each="comment: ${post.comments}">
                                         <div class="card-body">
                                             <div >
                                                 <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(4).webp"
                                                      alt="avatar" width="25" height="25"
                                                 />
-<!--                                                <a th:text="${post.author.userName}"-->
-<!--                                                   th:href="@{/profile(id=${user.user_id}, username=${user.username})}">-->
-<!--                                                </a>-->
+                                                <a th:text="${comment.author.userName}"
+                                                   th:href="@{/profile(id=${comment.author.id}, username=${comment.author.userName})}">
+                                                </a>
                                             </div>
-                                            <p class="mt-2">Type your note, and hit enter to add it</p>
+                                            <p class="mt-2" th:text="${comment.comment}"></p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div>
                                 <div>
-                                    <div class="form-outline mb-4 mt-1">
-                                        <input type="text" id="addANote" class="form-control" placeholder="Type comment..."/>
-                                    </div>
+<!--                                    <div class="form-outline mb-4 mt-1">-->
+<!--                                        <input type="text" id="addANote" class="form-control" placeholder="Type comment..."/>-->
+<!--                                        <button type="button" class="btn btn-primary">Primary</button>-->
+<!--                                    </div>-->
+                                    <form class="form-outline mb-4 mt-1">
+                                            <input type="text" id="addANote" class="form-control col-sm-9" placeholder="Type comment..."/>
+                                            <button type="button" class="btn btn-primary col-sm-3">Primary</button>
+                                    </form>
                                 </div>
                             </div>
                             <!--  Comments  -->
@@ -159,7 +166,6 @@
                     </div>
                 </div>
             <!-- User's posts-->
-
         </div>
     </div>
 </div>

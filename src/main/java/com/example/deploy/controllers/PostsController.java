@@ -1,6 +1,6 @@
 package com.example.deploy.controllers;
 
-import com.example.deploy.DTO.post.PostDTO;
+import com.example.deploy.DTO.post.PostProfileDTO;
 import com.example.deploy.models.Post;
 import com.example.deploy.services.PostServiceImpl;
 import com.example.deploy.services.UserService;
@@ -22,7 +22,7 @@ public class PostsController {
     }
 
     @PostMapping(value = "/profile", params = "create")
-    public String savePost(@ModelAttribute PostDTO postForm,
+    public String savePost(@ModelAttribute PostProfileDTO postForm,
                            @RequestParam("username") String username,
                            Model model) {
         model.addAttribute("postForm", postForm);

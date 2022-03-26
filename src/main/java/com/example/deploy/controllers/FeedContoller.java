@@ -1,6 +1,6 @@
 package com.example.deploy.controllers;
 
-import com.example.deploy.models.Post;
+import com.example.deploy.mappers.PostMapper;
 import com.example.deploy.services.PostServiceImpl;
 import com.example.deploy.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +10,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.security.Principal;
-import java.util.List;
 
 @Controller
 public class FeedContoller {
@@ -36,8 +35,8 @@ public class FeedContoller {
                 model.addAttribute("userId", userService.getUserByUsername(principal.getName()).getId());
             }
         }
-        List<Post> allPosts = postService.getPostByDateDesc();
-        model.addAttribute("allPosts", allPosts);
+//        List<Post> allPosts = postService.getPostByDateDesc();
+        model.addAttribute("allPosts", PostMapper.mapEntityToFeedDTO(postService.getPostByDateDesc()));
         return "feed";
     }
 }

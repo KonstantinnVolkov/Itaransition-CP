@@ -38,9 +38,8 @@ public class ProfileController {
         else {
             model.addAttribute("isEditEnabled", false);
         }
-//        model.addAttribute("user", userService.getUserByUsername(username));
         model.addAttribute("user", UserMapper.mapEntityToProfileDTO(userService.getUserByUsername(username)));
-        model.addAttribute("posts", PostMapper.mapEntityToDTO(postService.getAllPostsByAuthorId(user_id)));
+        model.addAttribute("posts", PostMapper.mapEntityToProfileDTO(postService.getAllPostsByAuthorId(user_id)));
         return "profile";
     }
 }
