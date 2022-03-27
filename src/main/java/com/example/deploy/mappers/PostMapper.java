@@ -1,5 +1,6 @@
 package com.example.deploy.mappers;
 
+import com.example.deploy.DTO.post.PostEditorDTO;
 import com.example.deploy.DTO.post.PostFeedDTO;
 import com.example.deploy.DTO.post.PostProfileDTO;
 import com.example.deploy.models.Post;
@@ -53,6 +54,14 @@ public class PostMapper {
         return postFeedDTOList;
     }
 
-
-
+    public static PostEditorDTO mapEntityToEditorDTO(Post post){
+        PostEditorDTO postEditorDTO = new PostEditorDTO();
+        postEditorDTO.setPost_id(post.getPost_id());
+        postEditorDTO.setTags(post.getTags());
+        postEditorDTO.setTheme(post.getTheme());
+        postEditorDTO.setBody(post.getBody());
+        postEditorDTO.setAuthor_id(post.getAuthor().getId());
+        postEditorDTO.setAuthor_username(post.getAuthor().getUserName());
+        return postEditorDTO;
+    }
 }

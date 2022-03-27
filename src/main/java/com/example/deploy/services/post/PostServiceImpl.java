@@ -1,5 +1,6 @@
 package com.example.deploy.services.post;
 
+import com.example.deploy.DTO.post.PostEditorDTO;
 import com.example.deploy.DTO.post.PostProfileDTO;
 import com.example.deploy.mappers.PostMapper;
 import com.example.deploy.models.Post;
@@ -61,9 +62,10 @@ public class PostServiceImpl implements PostService{
     }
 
     @Override
-    public void updatePost(Post updatedPost){
-        postRepository.delete(getPostById(updatedPost.getPost_id()));
-        postRepository.save(updatedPost);
+    public void update(long post_id, PostEditorDTO updatedPost){
+        postRepository.updatePostById(updatedPost.getPost_id(), updatedPost.getTags(),
+                                      updatedPost.getTheme(), updatedPost.getBody());
+
     }
 
 }

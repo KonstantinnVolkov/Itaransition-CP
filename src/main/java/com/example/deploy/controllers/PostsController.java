@@ -1,6 +1,8 @@
 package com.example.deploy.controllers;
 
+import com.example.deploy.DTO.post.PostEditorDTO;
 import com.example.deploy.DTO.post.PostProfileDTO;
+import com.example.deploy.mappers.PostMapper;
 import com.example.deploy.models.Post;
 import com.example.deploy.services.post.PostServiceImpl;
 import com.example.deploy.services.user.UserService;
@@ -22,11 +24,11 @@ public class PostsController {
     }
 
     @PostMapping(value = "/profile", params = "create")
-    public String savePost(@ModelAttribute PostProfileDTO postForm,
+    public String savePost(@ModelAttribute PostProfileDTO postProfileDTO,
                            @RequestParam("username") String username,
                            Model model) {
-        model.addAttribute("postForm", postForm);
-        postService.save(postForm, userService.getUserByUsername(username));
+        model.addAttribute("postForm", postProfileDTO);
+        postService.save(postProfileDTO, userService.getUserByUsername(username));
         return "redirect:/feed";
     }
 
@@ -35,15 +37,15 @@ public class PostsController {
                                      @RequestParam("username") String username,
                                      @RequestParam("postId") long postId,
                                      Model model){
-        Post post = postService.getPostById(postId);
-        model.addAttribute("postToEdit", post);
+        model.addAttribute("postToEdit", PostMapper.mapEntityToEditorDTO(
+                            postService.getPostById(postId)));
         return "postEdit";
     }
 
     @PostMapping("/postEditor")
-    private String saveUpdatedPost(@ModelAttribute Post editedPost){
-        postService.updatePost(editedPost);
-
+    private String saveUpdatedPost(@RequestParam("post_id") long post_id,
+                                   PostEditorDTO editedPost){
+        postService.update(post_id, editedPost);
         return "redirect:/feed";
     }
 

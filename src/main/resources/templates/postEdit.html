@@ -9,7 +9,7 @@
           crossorigin="anonymous">
 </head>
 <body style="background: #e1e3e6">
-<form action="#" th:action="@{/postEditor}" th:object="${postToEdit}" method="post">
+<form action="#" th:action="@{/postEditor(post_id=${postToEdit.post_id})}"method="post">
 <div class="justify-content-center mt-3">
     <div class="card mb-3">
         <div class="card-body">
@@ -17,30 +17,28 @@
                 <div class="col-sm-3">
                     <h6 class="mb-0 text-secondary">Tag</h6>
                 </div>
-                <input class="col-sm-9" th:field="*{tags}" th:value="${postToEdit.tags}" required>
+                <input class="col-sm-9" name="tags" th:value="${postToEdit.tags}" required>
             </div>
             <hr>
             <div class="row">
                 <div class="col-sm-3">
                     <h6 class="mb-0 text-secondary">Theme</h6>
                 </div>
-                <input class="col-sm-9" th:field="*{theme}" th:value="${postToEdit.theme}" required>
+                <input class="col-sm-9" name="theme" th:value="${postToEdit.theme}" required>
             </div>
             <hr>
             <div class="row">
                 <div class="col-sm-3">
                     <h6 class="mb-0 text-secondary">Topic</h6>
                 </div>
-                <input class="col-sm-9" th:field="*{body}" th:value="${postToEdit.body}" required>
+                <input class="col-sm-9" name="body" th:value="${postToEdit.body}" required>
             </div>
             <hr>
             <div class="row">
                 <div class="col-sm-12">
-                        <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit" disabled
-                            >Save
-                        </button>
+                        <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit">Save</button>
                     <a class="btn btn-warning btn-login text-uppercase fw-bold"
-                       th:href="@{/profile(id=${postToEdit.author.id}, username=${postToEdit.author.userName})}"
+                       th:href="@{/profile(id=${postToEdit.author_id}, username=${postToEdit.author_username})}"
                         >Cancel
                     </a>
                 </div>

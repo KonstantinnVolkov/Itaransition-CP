@@ -50,9 +50,16 @@
                 <td th:text="${user.state}">State</td>
                 <td><a th:href="@{/profile(id=${user.id}, username=${user.username})}">Go to profile</a></td>
                 <td>
-                    <a th:href="@{/makeAdmin(id=${user.id})}"> <button type="button" class="btn btn-primary me-2 btn-sm btn-block">Make Admin</button></a><br>
-                    <a th:href="@{/blockUser(id=${user.id})}"> <button type="button" class="btn btn-warning me-2 btn-sm btn-block mt-2">Block</button></a>
-                    <a th:href="@{/deleteUser(id=${user.id})}"> <button type="button" class="btn btn-danger me-2 btn-sm btn-block mt-2">Delete</button></a>
+                    <form method="post" th:action="@{/makeAdmin(id=${user.id}, role=ADMIN)}">
+                        <button type="submit" class="btn btn-primary me-2 btn-sm btn-block">Make Admin</button>
+                    </form>
+                    <br>
+                    <form method="post" th:action="@{/blockUser(id=${user.id})}">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <button type="button" class="btn btn-warning me-2 btn-sm btn-block mt-2">Block</button>
+                    </form>
+                    <form method="post" th:action="@{/deleteUser(id=${user.id})}">
+                        <button type="button" class="btn btn-danger me-2 btn-sm btn-block mt-2">Delete</button>
+                    </form>
                 </td>
             </tr>
         </tbody>
