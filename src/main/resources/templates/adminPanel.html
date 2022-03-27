@@ -50,14 +50,19 @@
                 <td th:text="${user.state}">State</td>
                 <td><a th:href="@{/profile(id=${user.id}, username=${user.username})}">Go to profile</a></td>
                 <td>
-                    <form method="post" th:action="@{/makeAdmin(id=${user.id}, role=ADMIN)}">
-                        <button type="submit" class="btn btn-primary me-2 btn-sm btn-block">Make Admin</button>
-                    </form>
+                    <div class="row">
+                        <form method="post" th:action="@{/giveRole(id=${user.id}, role=ADMIN)}">
+                            <button type="submit" class="btn btn-primary me-2 btn-sm btn-block">Make Admin</button>
+                        </form>
+                        <form method="post" th:action="@{/giveRole(id=${user.id}, role=USER)}" class="ml-2">
+                            <button type="submit" class="btn btn-primary me-2 btn-sm btn-block">Make User</button>
+                        </form>
+                    </div>
                     <br>
-                    <form method="post" th:action="@{/blockUser(id=${user.id})}">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <button type="button" class="btn btn-warning me-2 btn-sm btn-block mt-2">Block</button>
+                    <form method="post" th:action="@{/setStatus(id=${user.id}, state=BANNED)}">
+                        <button type="button" class="btn btn-warning me-2 btn-sm btn-block mt-2">Block</button>
                     </form>
-                    <form method="post" th:action="@{/deleteUser(id=${user.id})}">
+                    <form method="post" th:action="@{/setStatus(id=${user.id}, state=DELETED)}">
                         <button type="button" class="btn btn-danger me-2 btn-sm btn-block mt-2">Delete</button>
                     </form>
                 </td>

@@ -3,6 +3,7 @@ package com.example.deploy.controllers;
 import com.example.deploy.DTO.user.UserAdminDTO;
 import com.example.deploy.mappers.UserMapper;
 import com.example.deploy.models.Role;
+import com.example.deploy.models.State;
 import com.example.deploy.services.user.UserDetailsServiceImpl;
 import com.example.deploy.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,16 +29,23 @@ public class AdminPanelController {
 
     @GetMapping("/admin_panel")
     public String getAdminPage(Model model){
-        List<UserAdminDTO> list = UserMapper.mapEntityToUserAdminDTO(userDetailService.getAllUsers());
+        List<UserAdminDTO> list = UserMapper.mapEntityToUserAdminDTO(userDetailService.getAllUsersSortedById());
         model.addAttribute("allUsers", list);
         return "adminPanel";
     }
 
-    @PostMapping("/makeAdmin")
-    public String makeAdmin(@RequestParam("id") long id,
-                            @RequestParam("role") Role role){
+    @PostMapping("/giveRole")
+    public String setRole(@RequestParam("id") long id,
+                          @RequestParam("role") Role role){
         userService.updateRights(id, role);
         return "redirect:/adminPanel";
+    }
+
+    @PostMapping("/setStatus")
+    public String setStatus(@RequestParam("id") long id,
+                            @RequestParam("state") State state){
+        userService.updateStatus(id, state);
+        return "redirect:/adminPage";
     }
 
 }

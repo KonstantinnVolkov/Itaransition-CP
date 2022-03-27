@@ -1,6 +1,7 @@
 package com.example.deploy.services.user;
 
 import com.example.deploy.models.Role;
+import com.example.deploy.models.State;
 import com.example.deploy.models.User;
 import com.example.deploy.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +33,8 @@ public class UserService {
 
     public void updateRights(long user_id, Role role){
         userRepository.updateUserRights(user_id, role);
+    }
+    public void updateStatus(long user_id, State state){
+        userRepository.updateUserStatus(user_id, state);
     }
 }

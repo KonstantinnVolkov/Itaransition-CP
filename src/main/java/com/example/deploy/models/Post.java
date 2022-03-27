@@ -39,6 +39,10 @@ public class Post {
     @JoinColumn(name = "post_id")
     private Collection<Comment> comments;
 
+    @OneToMany
+    @JoinColumn(name = "post_id")
+    private Collection<Image> images;
+
     @Column(name = "rate")
     private Double rate;
 

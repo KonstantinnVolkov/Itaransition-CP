@@ -32,6 +32,7 @@ public class PostMapper {
             postProfileDTO.setTheme(post.getTheme());
             postProfileDTO.setBody(post.getBody());
             postProfileDTO.setRate(post.getRate());
+            postProfileDTO.setImagesToShow(post.getImages());
             postProfileDTO.setComments(post.getComments());
             postProfileDTOList.add(postProfileDTO);
         }
@@ -48,6 +49,7 @@ public class PostMapper {
             postFeedDTO.setBody(post.getBody());
             postFeedDTO.setRate(post.getRate());
             postFeedDTO.setAuthor(post.getAuthor());
+            postFeedDTO.setImages(post.getImages());
             postFeedDTO.setComments(post.getComments());
             postFeedDTOList.add(postFeedDTO);
         }

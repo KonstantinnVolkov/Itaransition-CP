@@ -7,6 +7,7 @@ import com.example.deploy.models.User;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
+import java.io.IOException;
 import java.util.List;
 
 public interface PostService {
@@ -16,6 +17,6 @@ public interface PostService {
     List<Post> getAllPostsByAuthorId(long user_id);
     Post getPostById(Long post_id);
     List<Post> getPostByDateDesc();
-    void save(PostProfileDTO postForm, User user);
+    void save(PostProfileDTO postForm, User user) throws IOException;
     void delete(long post_id);
 }

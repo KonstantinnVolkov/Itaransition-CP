@@ -31,4 +31,8 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public List<User> getAllUsers(){
         return userRepository.findAll();
     }
+
+    public List<User> getAllUsersSortedById(){
+        return userRepository.findAllByOrderByIdAsc();
+    }
 }

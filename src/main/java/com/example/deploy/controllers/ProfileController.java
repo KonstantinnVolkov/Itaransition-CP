@@ -26,7 +26,7 @@ public class ProfileController {
     }
 
     @GetMapping("/profile")
-    public String getProgilePage(@RequestParam("username") String username,
+    public String getProfilePage(@RequestParam("username") String username,
                                  @RequestParam("id") long user_id,
                                  Model model,
                                  Principal principal) {

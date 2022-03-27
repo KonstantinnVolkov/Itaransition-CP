@@ -1,25 +1,41 @@
 package com.example.deploy.services.post;
 
+import com.cloudinary.Cloudinary;
+import com.cloudinary.utils.ObjectUtils;
 import com.example.deploy.DTO.post.PostEditorDTO;
 import com.example.deploy.DTO.post.PostProfileDTO;
 import com.example.deploy.mappers.PostMapper;
+import com.example.deploy.models.Image;
 import com.example.deploy.models.Post;
 import com.example.deploy.models.User;
+import com.example.deploy.repositories.ImageRepository;
 import com.example.deploy.repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.net.URI;
+import java.net.URL;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
 public class PostServiceImpl implements PostService{
 
     private final PostRepository postRepository;
+    private final ImageRepository imageRepository;
+    private final Cloudinary cloudinary;
 
     @Autowired
-    public PostServiceImpl(PostRepository postRepository) {
+    public PostServiceImpl(PostRepository postRepository, ImageRepository imageRepository, Cloudinary cloudinary) {
         this.postRepository = postRepository;
+        this.imageRepository = imageRepository;
+        this.cloudinary = cloudinary;
     }
 
     @Override
@@ -46,8 +62,19 @@ public class PostServiceImpl implements PostService{
     }
 
     @Override
-    public void save(PostProfileDTO postForm, User user) {
+    public void save(PostProfileDTO postForm, User user) throws IOException {
         postRepository.save(PostMapper.mapDTO_toEntity(postForm, user));
+        long post_id = postRepository.findPostByAuthorAndAndBody(user, postForm.getBody()).getPost_id();
+        if (postForm.getImages() != null) {
+            for (MultipartFile image : postForm.getImages()) {
+                Map uploadResult = cloudinary.uploader().upload(image.getBytes(), ObjectUtils.emptyMap());
+                Image imageToSave = new Image();
+                imageToSave.setPost_id(post_id);
+                imageToSave.setLink(String.valueOf(uploadResult.get("url")));
+                imageRepository.save(imageToSave);
+
+            }
+        }
     }
 
     @Override

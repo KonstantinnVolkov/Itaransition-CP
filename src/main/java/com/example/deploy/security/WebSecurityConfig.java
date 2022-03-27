@@ -21,9 +21,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             "/deletePost/**",
             "/postEditor/**",
             "/admin_panel/**",
-            "/makeAdmin/**",
-            "/blockUser/**",
-            "/deleteUser/**"
+            "/giveRole/**",
+            "/setStatus/**"
     };
 
     private static final String[] staticResources  =  {

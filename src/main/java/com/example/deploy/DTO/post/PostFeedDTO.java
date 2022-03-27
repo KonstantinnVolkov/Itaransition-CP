@@ -1,6 +1,7 @@
 package com.example.deploy.DTO.post;
 
 import com.example.deploy.models.Comment;
+import com.example.deploy.models.Image;
 import com.example.deploy.models.User;
 import lombok.Data;
 
@@ -15,5 +16,6 @@ public class PostFeedDTO {
     private String body;
     private Double rate;
     private User author;
+    private Collection<Image> images;
     private Collection<Comment> comments;
 }

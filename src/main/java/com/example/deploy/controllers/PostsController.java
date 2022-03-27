@@ -11,6 +11,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
 @Controller
 public class PostsController {
 
@@ -25,8 +27,9 @@ public class PostsController {
 
     @PostMapping(value = "/profile", params = "create")
     public String savePost(@ModelAttribute PostProfileDTO postProfileDTO,
+                           @RequestParam("id") long id,
                            @RequestParam("username") String username,
-                           Model model) {
+                           Model model) throws IOException {
         model.addAttribute("postForm", postProfileDTO);
         postService.save(postProfileDTO, userService.getUserByUsername(username));
         return "redirect:/feed";

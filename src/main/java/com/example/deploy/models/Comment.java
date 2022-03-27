@@ -18,10 +18,6 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.TABLE)
     private Long comment_id;
 
-//    @ManyToOne(fetch = FetchType.EAGER)
-//    @JoinColumn(name = "post_id")
-//    private Post post;
-//
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "author_id")
     private User author;
