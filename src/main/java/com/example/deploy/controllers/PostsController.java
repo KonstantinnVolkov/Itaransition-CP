@@ -32,7 +32,7 @@ public class PostsController {
                            Model model) throws IOException {
         model.addAttribute("postForm", postProfileDTO);
         postService.save(postProfileDTO, userService.getUserByUsername(username));
-        return "redirect:/feed";
+        return String.format("redirect:/profile?id=%d&username=%s", id, username);
     }
 
     @GetMapping("/postEditor")
@@ -57,6 +57,6 @@ public class PostsController {
                              @RequestParam("username") String username,
                              @RequestParam("postId") long postId){
         postService.delete(postId);
-        return "redirect:/feed";
+        return String.format("redirect:/profile?id=%d&username=%s", authorId, username);
     }
 }

@@ -31,6 +31,10 @@ public class ProfileController {
                                  Model model,
                                  Principal principal) {
         User currentUser = userService.getUserByUsername(principal.getName());  //Забираем текущего залогиненого пользователя
+        if ( (userService.getUserByUsername(username) == null || userService.getUserById(user_id) == null)  //Что бы при изменении параметров URL'а
+                    || !(userService.getUserByUsername(username).getId().equals(user_id))) {                    //не переходило хер пойми куда
+            return String.format("redirect:/profile?id=%d&username=%s", currentUser.getId(), currentUser.getUserName());
+        }
         if (currentUser.getRole().equals(Role.ADMIN) ||        //Может ли пользователь редактировать и создавать свои и чужие посты
                 (currentUser.getUserName().equals(username) && currentUser.getId().equals(user_id))) {
             model.addAttribute("isEditEnabled", true);

@@ -40,7 +40,7 @@ public class PostServiceImpl implements PostService{
 
     @Override
     public List<Post> getAllPostsByAuthorId(long user_id){
-        return postRepository.findAllByAuthor_Id(user_id);
+        return postRepository.findAllByAuthor_IdOrderByPostedDesc(user_id);
     }
 
     @Override
@@ -65,15 +65,15 @@ public class PostServiceImpl implements PostService{
     public void save(PostProfileDTO postForm, User user) throws IOException {
         postRepository.save(PostMapper.mapDTO_toEntity(postForm, user));
         long post_id = postRepository.findPostByAuthorAndAndBody(user, postForm.getBody()).getPost_id();
-        if (postForm.getImages() != null) {
-            for (MultipartFile image : postForm.getImages()) {
-                Map uploadResult = cloudinary.uploader().upload(image.getBytes(), ObjectUtils.emptyMap());
-                Image imageToSave = new Image();
-                imageToSave.setPost_id(post_id);
-                imageToSave.setLink(String.valueOf(uploadResult.get("url")));
-                imageRepository.save(imageToSave);
 
-            }
+        for (MultipartFile image : postForm.getImages()) {
+            if (image.getBytes().length == 0)
+                break;
+            Map uploadResult = cloudinary.uploader().upload(image.getBytes(), ObjectUtils.emptyMap());
+            Image imageToSave = new Image();
+            imageToSave.setPost_id(post_id);
+            imageToSave.setLink(String.valueOf(uploadResult.get("url")));
+            imageRepository.save(imageToSave);
         }
     }
 

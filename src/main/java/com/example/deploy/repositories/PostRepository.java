@@ -21,6 +21,7 @@ public interface PostRepository extends JpaRepository<Post, Long> {
                         @Param("theme") String theme, @Param("body") String body);
 
     List<Post> findAllByAuthor_Id(Long author_id);
+    List<Post> findAllByAuthor_IdOrderByPostedDesc(Long author_id);
     List<Post> findAllByOrderByPostedDesc();
     List<Post> findByTags(String tag);
     Post findPostByAuthorAndAndBody(User author, String body);

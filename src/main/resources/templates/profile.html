@@ -7,6 +7,7 @@
           integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
           crossorigin="anonymous">
     <link rel="stylesheet" href="../static/imageLoader.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <title th:text="${user.username}"></title>
 </head>
 <body style="background: #e1e3e6">
@@ -81,9 +82,7 @@
                                     <h6 class="mb-0 text-secondary">Upload images</h6>
                                 </div>
                                 <div class="file-drop-area col-sm-9">
-<!--                                    <span class="choose-file-button">Choose files</span>-->
-<!--                                    <span class="file-message">or drag and drop files here</span>-->
-                                    <input class="file-input" type="file" name="images" multiple>
+                                    <input class="file-input" type="file" accept="image/*" name="images" multiple>
                                 </div>
                             </div>
                             <hr>
@@ -102,6 +101,27 @@
                 <div class="justify-content-center" th:each="post: ${posts}">
                     <div class="card mb-3">
                         <div class="card-body">
+                            <div class="row">
+                                <div class="col-sm-3">
+                                    <h6 class="mb-0 text-secondary">Rate</h6>
+                                </div>
+                                <div class="col-sm-7" name="rate" th:text="${post.rate}"></div>
+                                <div class="col-sm-2">
+<!--                                    <form class="star-rating" method="post" th:action="@{/saveRate(post_id=${post.post_id})}">-->
+<!--                                        <button type="submit" style="border-width:0"><i class="fa fa-star"></i></button>-->
+<!--                                        <button type="submit" style="border-width:0"><i class="fa fa-star"></i></button>-->
+<!--                                        <button type="submit" style="border-width:0"><i class="fa fa-star"></i></button>-->
+<!--                                        <button type="submit" style="border-width:0"><i class="fa fa-star"></i></button>-->
+<!--                                        <button type="submit" style="border-width:0"><i class="fa fa-star"></i></button>-->
+<!--                                    </form>-->
+                                        <a type="submit" style="border-width:0" th:href="@{/saveRate(post_id=${post.post_id}, rate=${1})}"><i class="fa fa-star"></i></a>
+                                        <a type="submit" style="border-width:0" th:href="@{/saveRate(post_id=${post.post_id}, rate=${2})}"><i class="fa fa-star"></i></a>
+                                        <a type="submit" style="border-width:0" th:href="@{/saveRate(post_id=${post.post_id}, rate=${3})}"><i class="fa fa-star"></i></a>
+                                        <a type="submit" style="border-width:0" th:href="@{/saveRate(post_id=${post.post_id}, rate=${4})}"><i class="fa fa-star"></i></a>
+                                        <a type="submit" style="border-width:0" th:href="@{/saveRate(post_id=${post.post_id}, rate=${5})}"><i class="fa fa-star"></i></a>
+                                </div>
+                            </div>
+                            <hr>
                             <div class="row">
                                 <div class="col-sm-3">
                                     <h6 class="mb-0 text-secondary">Tag</h6>
@@ -173,7 +193,7 @@
                             <div>
                                 <form class="form-outline mb-4 mt-1" method="post" action="#" th:action="@{/saveComment(post_id=${post.post_id})}">
                                     <input type="text" name="commentText" class="form-control col-sm-9" placeholder="Type comment..."/>
-                                    <button type="submit" class="btn btn-primary col-sm-3">Save</button>
+                                    <button type="submit" class="btn btn-primary col-sm-3 mt-2">Save</button>
                                 </form>
                             </div>
                             <!--  Comments  -->
@@ -189,16 +209,8 @@
         crossorigin="anonymous">
 </script>
 <script>
-    $(document).on('change', '.file-input', function() {
-        var filesCount = $(this)[0].files.length;
-        var textbox = $(this).prev();
-
-        if (filesCount === 1) {
-            var fileName = $(this).val().split('\\').pop();
-            textbox.text(fileName);
-        } else {
-            textbox.text(filesCount + ' files selected');
-        }
+    $(document).ready(function() {
+        $('#rateMe1').mdbRate();
     });
 </script>
 </body>

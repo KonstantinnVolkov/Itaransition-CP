@@ -15,7 +15,7 @@ import java.util.Date;
 public class Comment {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.TABLE)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long comment_id;
 
     @ManyToOne(fetch = FetchType.EAGER)
