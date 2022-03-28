@@ -34,18 +34,18 @@ public class AdminPanelController {
         return "adminPanel";
     }
 
-    @PostMapping("/giveRole")
+    @GetMapping("/giveRole")
     public String setRole(@RequestParam("id") long id,
                           @RequestParam("role") Role role){
         userService.updateRights(id, role);
-        return "redirect:/adminPanel";
+        return "redirect:/admin_panel";
     }
 
-    @PostMapping("/setStatus")
+    @GetMapping("/setStatus")
     public String setStatus(@RequestParam("id") long id,
                             @RequestParam("state") State state){
         userService.updateStatus(id, state);
-        return "redirect:/adminPage";
+        return "redirect:/admin_panel";
     }
 
 }

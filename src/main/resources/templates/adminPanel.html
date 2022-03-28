@@ -50,21 +50,12 @@
                 <td th:text="${user.state}">State</td>
                 <td><a th:href="@{/profile(id=${user.id}, username=${user.username})}">Go to profile</a></td>
                 <td>
-                    <div class="row">
-                        <form method="post" th:action="@{/giveRole(id=${user.id}, role=ADMIN)}">
-                            <button type="submit" class="btn btn-primary me-2 btn-sm btn-block">Make Admin</button>
-                        </form>
-                        <form method="post" th:action="@{/giveRole(id=${user.id}, role=USER)}" class="ml-2">
-                            <button type="submit" class="btn btn-primary me-2 btn-sm btn-block">Make User</button>
-                        </form>
-                    </div>
+                    <a th:href="@{/giveRole(id=${user.id}, role=ADMIN)}"><button type="submit" class="btn btn-primary me-2 btn-sm btn-block">Make Admin</button></a>
+                    <a th:href="@{/giveRole(id=${user.id}, role=USER)}"><button type="submit" class="btn btn-primary me-2 btn-sm btn-block">Make User</button></a>
                     <br>
-                    <form method="post" th:action="@{/setStatus(id=${user.id}, state=BANNED)}">
-                        <button type="button" class="btn btn-warning me-2 btn-sm btn-block mt-2">Block</button>
-                    </form>
-                    <form method="post" th:action="@{/setStatus(id=${user.id}, state=DELETED)}">
-                        <button type="button" class="btn btn-danger me-2 btn-sm btn-block mt-2">Delete</button>
-                    </form>
+                    <a th:href="@{/setStatus(id=${user.id}, state=ACTIVE)}"> <button type="button" class="btn btn-warning me-2 btn-sm btn-block mt-2">UNBLOCK</button></a>
+                    <a th:href="@{/setStatus(id=${user.id}, state=BANNED)}"> <button type="button" class="btn btn-warning me-2 btn-sm btn-block mt-2">BLOCK</button></a>
+                    <a th:href="@{/setStatus(id=${user.id}, state=DELETED)}"> <button type="button" class="btn btn-warning me-2 btn-sm btn-block mt-2">DELETE</button></a>
                 </td>
             </tr>
         </tbody>
