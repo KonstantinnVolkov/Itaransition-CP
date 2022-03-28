@@ -22,7 +22,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             "/postEditor/**",
             "/admin_panel/**",
             "/giveRole/**",
-            "/setStatus/**"
+            "/setStatus/**",
+            "saveRate/**"
     };
 
     private static final String[] staticResources  =  {
