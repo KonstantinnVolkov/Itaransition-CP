@@ -5,11 +5,15 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-@RequestMapping("/error")
 public class ErrorController {
 
-    @GetMapping
+    @GetMapping("/error")
     public String getErrorPage() {
         return "error";
+    }
+
+    @GetMapping("/")
+    public String redirectToFeed(){
+        return "redirect:/feed";
     }
 }

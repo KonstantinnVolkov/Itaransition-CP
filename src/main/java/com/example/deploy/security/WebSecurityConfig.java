@@ -1,25 +1,17 @@
 package com.example.deploy.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.security.oauth2.client.EnableOAuth2Sso;
-import org.springframework.boot.web.servlet.FilterRegistrationBean;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.client.OAuth2ClientContext;
-import org.springframework.security.oauth2.client.filter.OAuth2ClientContextFilter;
 
 
 @EnableWebSecurity
-//@EnableOAuth2Sso
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private static final String[] FOR_ADMINS = {
-            "/deletePost/**",
-            "/postEditor/**",
             "/admin_panel/**",
             "/giveRole/**",
             "/setStatus/**",
@@ -50,16 +42,23 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/feed/**/").permitAll()
                 .antMatchers("/registration/**").permitAll()
                 .antMatchers("/profile/**/").authenticated()
-                .antMatchers(FOR_ADMINS).hasAuthority("ADMIN")
-                .and()
+                .antMatchers(FOR_ADMINS).hasAuthority("ADMIN");
+
+        http
                 .formLogin()
                 .usernameParameter("userName")
                 .loginPage("/login")
                 .defaultSuccessUrl("/feed")
                 .and()
                 .logout()
-                .logoutSuccessUrl("/login")
-                .and()
+                .logoutSuccessUrl("/login");
+        http
+                .rememberMe()
+                .key("supersecret")
+                .rememberMeParameter("remember-me")
+                .rememberMeCookieName("rememberLogin")
+                .tokenValiditySeconds(86400);
+        http
                 .csrf().disable();
     }
 }

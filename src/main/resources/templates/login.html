@@ -31,22 +31,14 @@
             </div>
 
             <div class="form-check mb-3">
-              <input class="form-check-input" type="checkbox" value="" id="rememberPasswordCheck">
-              <label class="form-check-label" for="rememberPasswordCheck" th:utext="#{login.rememberMe}"></label>
+              <input class="form-check-input" type="checkbox" value="" id="remember-me" name="remember-me">
+              <label class="form-check-label" for="remember-me" th:utext="#{login.rememberMe}"></label>
             </div>
             <div class="d-grid">
               <button class="btn btn-primary btn-login text-uppercase fw-bold" type="submit" th:utext="#{login.signInButton}"></button>
             </div>
             <hr class="my-4">
-            <div class="d-grid mb-2">
-             <a th:href="@{/oauth2/authorization/google}"> <button class="btn btn-google btn-login text-uppercase fw-bold" id="googleAuth" type="submit" th:utext="#{googleSignIn}">
-<!--                <i class="fab fa-google me-2"></i>-->
-             </button> </a>
-            </div>
-            <div>
-<!--              <button><a href="/registration" th:utext="#{login.createAnAccount}">Or create an account</a> </button>-->
-              <a href="/registration" th:utext="#{login.createAnAccount}">Or create an account</a>
-            </div>
+            <a href="/registration" th:utext="#{login.createAnAccount}">Or create an account</a>
           </form>
         </div>
       </div>
