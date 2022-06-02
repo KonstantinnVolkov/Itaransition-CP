@@ -9,8 +9,38 @@ import com.example.deploy.models.User;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class PostMapper {
+
+    public static List<PostProfileDTO> mapEntityToProfileDTO(List<Post> usersPosts){
+        return usersPosts.stream().map(post ->
+                        new PostProfileDTO(
+                                post.getPost_id(),
+                                post.getTags(),
+                                post.getTheme(),
+                                post.getBody(),
+                                post.getRate(),
+                                post.getComments(),
+                                post.getImages()
+                        )
+                ).collect(Collectors.toList());
+    }
+
+    public static List<PostFeedDTO> mapEntityToFeedDTO(List<Post> usersPosts){
+        return usersPosts.stream().map(post ->
+                        new PostFeedDTO(
+                                post.getPost_id(),
+                                post.getTags(),
+                                post.getTheme(),
+                                post.getBody(),
+                                post.getRate(),
+                                post.getAuthor(),
+                                post.getImages(),
+                                post.getComments()
+                        )
+                ).collect(Collectors.toList());
+    }
 
     public static Post mapDTO_toEntity(PostProfileDTO postDTO, User user){
         Post post = new Post();
@@ -21,39 +51,6 @@ public class PostMapper {
         post.setRate(0D);
         post.setPosted(new Date());
         return post;
-    }
-
-    public static List<PostProfileDTO> mapEntityToProfileDTO(List<Post> usersPosts){
-        List<PostProfileDTO> postProfileDTOList = new ArrayList<>();
-        for (Post post: usersPosts) {
-            PostProfileDTO postProfileDTO = new PostProfileDTO();
-            postProfileDTO.setPost_id(post.getPost_id());
-            postProfileDTO.setTags(post.getTags());
-            postProfileDTO.setTheme(post.getTheme());
-            postProfileDTO.setBody(post.getBody());
-            postProfileDTO.setRate(post.getRate());
-            postProfileDTO.setImagesToShow(post.getImages());
-            postProfileDTO.setComments(post.getComments());
-            postProfileDTOList.add(postProfileDTO);
-        }
-        return postProfileDTOList;
-    }
-
-    public static List<PostFeedDTO> mapEntityToFeedDTO(List<Post> usersPosts){
-        List<PostFeedDTO> postFeedDTOList = new ArrayList<>();
-        for (Post post: usersPosts) {
-            PostFeedDTO postFeedDTO = new PostFeedDTO();
-            postFeedDTO.setPost_id(post.getPost_id());
-            postFeedDTO.setTags(post.getTags());
-            postFeedDTO.setTheme(post.getTheme());
-            postFeedDTO.setBody(post.getBody());
-            postFeedDTO.setRate(post.getRate());
-            postFeedDTO.setAuthor(post.getAuthor());
-            postFeedDTO.setImages(post.getImages());
-            postFeedDTO.setComments(post.getComments());
-            postFeedDTOList.add(postFeedDTO);
-        }
-        return postFeedDTOList;
     }
 
     public static PostEditorDTO mapEntityToEditorDTO(Post post){

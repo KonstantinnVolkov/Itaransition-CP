@@ -9,6 +9,7 @@ import com.example.deploy.models.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class UserMapper {
 
@@ -31,16 +32,14 @@ public class UserMapper {
     }
 
     public static List<UserAdminDTO> mapEntityToUserAdminDTO(List<User> allUsers){
-        List<UserAdminDTO> userAdminDTOList = new ArrayList<>();
-        for (User user: allUsers) {
-            UserAdminDTO userAdminDTO = new UserAdminDTO();
-            userAdminDTO.setId(user.getId());
-            userAdminDTO.setEmail(user.getEmail());
-            userAdminDTO.setUsername(user.getUserName());
-            userAdminDTO.setRole(user.getRole());
-            userAdminDTO.setState(user.getState());
-            userAdminDTOList.add(userAdminDTO);
-        }
-        return userAdminDTOList;
+        return allUsers.stream().map(user ->
+                new UserAdminDTO(
+                        user.getId(),
+                        user.getEmail(),
+                        user.getUserName(),
+                        user.getRole(),
+                        user.getState()
+                )
+        ).collect(Collectors.toList());
     }
 }

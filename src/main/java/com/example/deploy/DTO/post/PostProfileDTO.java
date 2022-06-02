@@ -17,4 +17,19 @@ public class PostProfileDTO {
     private Collection<Comment> comments;
     private Collection<MultipartFile> images;
     private Collection<Image> imagesToShow;
+
+    public PostProfileDTO() {
+    }
+
+    public PostProfileDTO(Long post_id, String tags, String theme, String body,
+                          Double rate, Collection<Comment> comments,
+                          Collection<Image> imagesToShow) {
+        this.post_id = post_id;
+        this.tags = tags;
+        this.theme = theme;
+        this.body = body;
+        this.rate = rate;
+        this.comments = comments;
+        this.imagesToShow = imagesToShow;
+    }
 }

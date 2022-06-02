@@ -101,6 +101,6 @@ public class PostServiceImpl implements PostService{
 
     @Override
     public List<Post> getPostsSortedByTag(String tag) {
-        return postRepository.findAllByTagsOrderByPosted(tag);
+        return postRepository.findAllByTagsOrderByPostedDesc(tag);
     }
 }

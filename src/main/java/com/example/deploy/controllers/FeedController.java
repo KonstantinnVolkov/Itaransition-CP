@@ -1,6 +1,7 @@
 package com.example.deploy.controllers;
 
 import com.example.deploy.mappers.PostMapper;
+import com.example.deploy.models.Post;
 import com.example.deploy.services.post.PostServiceImpl;
 import com.example.deploy.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
+import java.util.List;
 
 @RequestMapping("/feed")
 @Controller
@@ -44,7 +46,11 @@ public class FeedController {
             model.addAttribute("allPosts", PostMapper.mapEntityToFeedDTO(postService.getPostByDateDesc()));
         }
         else {
-            model.addAttribute("allPosts", PostMapper.mapEntityToFeedDTO(postService.getPostsSortedByTag(sortedBy)));
+            List<Post> sortedPosts = postService.getPostsSortedByTag(sortedBy);
+            if (sortedPosts.isEmpty()) {
+                return "redirect:/feed";
+            }
+            model.addAttribute("allPosts", PostMapper.mapEntityToFeedDTO(sortedPosts));
             System.out.println("sortedBy is " + sortedBy);
         }
         return "feed";
