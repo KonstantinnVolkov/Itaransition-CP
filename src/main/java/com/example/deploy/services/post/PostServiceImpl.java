@@ -11,11 +11,14 @@ import com.example.deploy.models.User;
 import com.example.deploy.repositories.ImageRepository;
 import com.example.deploy.repositories.PostRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
+import java.awt.print.Pageable;
 import java.io.File;
 import java.io.IOException;
 import java.net.URI;
@@ -30,6 +33,7 @@ public class PostServiceImpl implements PostService{
     private final PostRepository postRepository;
     private final ImageRepository imageRepository;
     private final Cloudinary cloudinary;
+    private final int POST_AMOUNT = 10;
 
     @Autowired
     public PostServiceImpl(PostRepository postRepository, ImageRepository imageRepository, Cloudinary cloudinary) {
@@ -95,4 +99,8 @@ public class PostServiceImpl implements PostService{
 
     }
 
+    @Override
+    public List<Post> getPostsSortedByTag(String tag) {
+        return postRepository.findAllByTagsOrderByPosted(tag);
+    }
 }

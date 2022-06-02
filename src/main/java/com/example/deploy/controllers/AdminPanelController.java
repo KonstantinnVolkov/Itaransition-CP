@@ -40,12 +40,4 @@ public class AdminPanelController {
         userService.updateRights(id, role);
         return "redirect:/admin_panel";
     }
-
-    @GetMapping("/setStatus")
-    public String setStatus(@RequestParam("id") long id,
-                            @RequestParam("state") State state){
-        userService.updateStatus(id, state);
-        return "redirect:/admin_panel";
-    }
-
 }

@@ -7,6 +7,7 @@ import com.example.deploy.models.User;
 import com.example.deploy.services.post.PostServiceImpl;
 import com.example.deploy.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +30,11 @@ public class ProfileController {
     public String getProfilePage(@RequestParam("username") String username,
                                  @RequestParam("id") long user_id,
                                  Model model,
+                                 Authentication authentication,
                                  Principal principal) {
+        if (!authentication.isAuthenticated()) {
+            return "redirect:/login";
+        }
         User currentUser = userService.getUserByUsername(principal.getName());  //Забираем текущего залогиненого пользователя
         if ( (userService.getUserByUsername(username) == null || userService.getUserById(user_id) == null)  //Что бы при изменении параметров URL'а
                     || !(userService.getUserByUsername(username).getId().equals(user_id))) {                    //не переходило хер пойми куда

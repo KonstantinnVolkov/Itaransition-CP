@@ -20,9 +20,8 @@ public interface PostRepository extends JpaRepository<Post, Long> {
     void updatePostById(@Param("post_id") long post_id, @Param("tags") String tags,
                         @Param("theme") String theme, @Param("body") String body);
 
-    List<Post> findAllByAuthor_Id(Long author_id);
     List<Post> findAllByAuthor_IdOrderByPostedDesc(Long author_id);
     List<Post> findAllByOrderByPostedDesc();
-    List<Post> findByTags(String tag);
     Post findPostByAuthorAndAndBody(User author, String body);
+    List<Post> findAllByTagsOrderByPosted(String tags);
 }

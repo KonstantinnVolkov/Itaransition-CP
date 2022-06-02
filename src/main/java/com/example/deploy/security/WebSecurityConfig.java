@@ -30,14 +30,15 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     private final UserDetailsService userDetailsService;
 
     @Autowired
-    public WebSecurityConfig(PasswordEncoder passwordEncoder, UserDetailsService userDetailsService) {
+    public WebSecurityConfig(PasswordEncoder passwordEncoder,
+                            UserDetailsService userDetailsService) {
         this.passwordEncoder = passwordEncoder;
         this.userDetailsService = userDetailsService;
     }
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
-                .authorizeRequests()
+                .authorizeRequests()                //authentication section
                 .antMatchers(staticResources).permitAll()
                 .antMatchers("/feed/**/").permitAll()
                 .antMatchers("/registration/**").permitAll()
@@ -45,7 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers(FOR_ADMINS).hasAuthority("ADMIN");
 
         http
-                .formLogin()
+                .formLogin()            //login page setup
                 .usernameParameter("userName")
                 .loginPage("/login")
                 .defaultSuccessUrl("/feed")
@@ -53,11 +54,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logout()
                 .logoutSuccessUrl("/login");
         http
-                .rememberMe()
-                .key("supersecret")
-                .rememberMeParameter("remember-me")
+                .rememberMe()                       //remember-me setup
+                .key("$2fuckBSEU2$")
+                .userDetailsService(userDetailsService)
+                .rememberMeParameter("remember-me")         //remember-me parameter name, by default spring uses "remember-me" but let it be
                 .rememberMeCookieName("rememberLogin")
-                .tokenValiditySeconds(86400);
+                .tokenValiditySeconds(86400);               //token will be valid for 24 hours
         http
                 .csrf().disable();
     }

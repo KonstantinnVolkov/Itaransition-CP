@@ -4,6 +4,7 @@ import com.example.deploy.DTO.post.PostEditorDTO;
 import com.example.deploy.DTO.post.PostProfileDTO;
 import com.example.deploy.models.Post;
 import com.example.deploy.models.User;
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 
@@ -19,4 +20,6 @@ public interface PostService {
     List<Post> getPostByDateDesc();
     void save(PostProfileDTO postForm, User user) throws IOException;
     void delete(long post_id);
+    List<Post> getPostsSortedByTag(String tag);
+
 }

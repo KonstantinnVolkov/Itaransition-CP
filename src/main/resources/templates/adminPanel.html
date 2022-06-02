@@ -52,10 +52,6 @@
                 <td>
                     <a th:href="@{/giveRole(id=${user.id}, role=ADMIN)}"><button type="submit" class="btn btn-primary me-2 btn-sm btn-block">Make Admin</button></a>
                     <a th:href="@{/giveRole(id=${user.id}, role=USER)}"><button type="submit" class="btn btn-primary me-2 btn-sm btn-block">Make User</button></a>
-                    <br>
-                    <a th:href="@{/setStatus(id=${user.id}, state=ACTIVE)}"> <button type="button" class="btn btn-warning me-2 btn-sm btn-block mt-2">UNBLOCK</button></a>
-                    <a th:href="@{/setStatus(id=${user.id}, state=BANNED)}"> <button type="button" class="btn btn-warning me-2 btn-sm btn-block mt-2">BLOCK</button></a>
-                    <a th:href="@{/setStatus(id=${user.id}, state=DELETED)}"> <button type="button" class="btn btn-warning me-2 btn-sm btn-block mt-2">DELETE</button></a>
                 </td>
             </tr>
         </tbody>

@@ -18,9 +18,10 @@
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <li><a th:href="@{/feed}" class="nav-link px-2 text-secondary">Feed</a></li>
                 <li><a th:href="@{/admin_panel}" class="nav-link px-2 text-white">Admin's tools</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">Books</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">Games</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">Food</a></li>
+                <li><a href="/feed" class="nav-link px-2 text-white">All</a></li>
+                <li><a href="/feed?sortedBy=books" class="nav-link px-2 text-white">Books</a></li>
+                <li><a href="/feed?sortedBy=games" class="nav-link px-2 text-white">Games</a></li>
+                <li><a href="/feed?sortedBy=food" class="nav-link px-2 text-white">Food</a></li>
             </ul>
 
             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">

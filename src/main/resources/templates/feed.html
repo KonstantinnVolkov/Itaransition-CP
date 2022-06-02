@@ -14,9 +14,10 @@
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <li><a th:href="@{/profile(id=${userId}, username=${username})}" class="nav-link px-2 text-secondary">Profile</a></li>
                 <li><a href="/admin_panel" class="nav-link px-2 text-white">Admin's tools</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">Books</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">Games</a></li>
-                <li><a href="#" class="nav-link px-2 text-white">Food</a></li>
+                <li><a href="/feed" class="nav-link px-2 text-white">All</a></li>
+                <li><a href="/feed?sortedBy=books" class="nav-link px-2 text-white">Books</a></li>
+                <li><a href="/feed?sortedBy=games" class="nav-link px-2 text-white">Games</a></li>
+                <li><a href="/feed?sortedBy=food" class="nav-link px-2 text-white">Food</a></li>
             </ul>
 
             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
@@ -32,12 +33,8 @@
         </div>
     </div>
 </header>
-<div class="row">
-    <div class="col">
-
-    </div>
-
-    <div class="mt-2 col-8 ">
+<div class="container">
+    <div class="mt-2 col-12">
         <div th:each="post: ${allPosts}">
             <div class="mt-2 justify-content-center">
                 <div class="card mb-3">
@@ -131,9 +128,9 @@
             </div>
         </div>
     </div>
-    <div class="col">
+<!--    <div class="col">-->
 
-    </div>
+<!--    </div>-->
 </div>
 
 

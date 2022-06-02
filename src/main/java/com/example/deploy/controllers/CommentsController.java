@@ -24,7 +24,9 @@ public class CommentsController {
     @PostMapping("/saveComment")
     public String saveComment(@RequestParam("post_id") long post_id,
                               CommentDTO commentToSave, Principal principal) {
-        commentService.save(post_id, userService.getUserByUsername(principal.getName()).getId(), commentToSave.getCommentText());
+        if (!commentToSave.getCommentText().isEmpty()) {
+            commentService.save(post_id, userService.getUserByUsername(principal.getName()).getId(), commentToSave.getCommentText());
+        }
         return "redirect:/feed";
     }
 
