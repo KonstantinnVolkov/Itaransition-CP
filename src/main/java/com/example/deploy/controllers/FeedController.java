@@ -2,6 +2,7 @@ package com.example.deploy.controllers;
 
 import com.example.deploy.mappers.PostMapper;
 import com.example.deploy.models.Post;
+import com.example.deploy.models.Role;
 import com.example.deploy.services.post.PostServiceImpl;
 import com.example.deploy.services.user.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,12 +38,17 @@ public class FeedController {
             isAuthenticated = authentication.isAuthenticated();
             model.addAttribute("authentication", isAuthenticated);
             if (isAuthenticated) {
+                if (userService.getUserByUsername(principal.getName()).getRole().equals(Role.ADMIN)) {
+                    model.addAttribute("isAdmin", true);
+                }
+                else {
+                    model.addAttribute("isAdmin", false);
+                }
                 model.addAttribute("username", principal.getName());
                 model.addAttribute("userId", userService.getUserByUsername(principal.getName()).getId());
             }
         }
         if (sortedBy == null) {
-            System.out.println("sortedBy is null");
             model.addAttribute("allPosts", PostMapper.mapEntityToFeedDTO(postService.getPostByDateDesc()));
         }
         else {
@@ -51,7 +57,6 @@ public class FeedController {
                 return "redirect:/feed";
             }
             model.addAttribute("allPosts", PostMapper.mapEntityToFeedDTO(sortedPosts));
-            System.out.println("sortedBy is " + sortedBy);
         }
         return "feed";
     }

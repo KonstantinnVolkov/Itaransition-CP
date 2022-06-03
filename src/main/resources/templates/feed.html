@@ -12,8 +12,8 @@
     <div class="container">
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
-                <li><a th:href="@{/profile(id=${userId}, username=${username})}" class="nav-link px-2 text-secondary">Profile</a></li>
-                <li><a href="/admin_panel" class="nav-link px-2 text-white">Admin's tools</a></li>
+                <li th:if="${authentication}"><a th:href="@{/profile(id=${userId}, username=${username})}" class="nav-link px-2 text-secondary">Profile</a></li>
+                <li th:if="${isAdmin}"><a href="/admin_panel" class="nav-link px-2 text-white">Admin's tools</a></li>
                 <li><a href="/feed" class="nav-link px-2 text-white">All</a></li>
                 <li><a href="/feed?sortedBy=books" class="nav-link px-2 text-white">Books</a></li>
                 <li><a href="/feed?sortedBy=games" class="nav-link px-2 text-white">Games</a></li>
@@ -21,7 +21,7 @@
             </ul>
 
             <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3">
-                <input type="input" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
+                <input type="text" class="form-control form-control-dark" placeholder="Search..." aria-label="Search">
             </form>
             <div th:if="${authentication}" class="text-end">
                 <a href="/logout"> <button type="button" class="btn btn-warning me-2">Logout</button></a>
@@ -45,6 +45,7 @@
                                 <h6 class="mb-0 text-secondary">Rate</h6>
                             </div>
                             <div class="col-sm-7" name="rate" th:text="${post.rate}"></div>
+                            <!--  Rate area -->
                             <div class="col-sm-2">
                                 <a type="submit" style="border-width:0" th:href="@{/saveRate(post_id=${post.post_id}, rate=${1})}"><i class="fa fa-star"></i></a>
                                 <a type="submit" style="border-width:0" th:href="@{/saveRate(post_id=${post.post_id}, rate=${2})}"><i class="fa fa-star"></i></a>
@@ -52,6 +53,7 @@
                                 <a type="submit" style="border-width:0" th:href="@{/saveRate(post_id=${post.post_id}, rate=${4})}"><i class="fa fa-star"></i></a>
                                 <a type="submit" style="border-width:0" th:href="@{/saveRate(post_id=${post.post_id}, rate=${5})}"><i class="fa fa-star"></i></a>
                             </div>
+                            <!--  Rate area -->
                         </div>
                         <hr>
                         </div>

@@ -17,7 +17,7 @@
         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
             <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
                 <li><a th:href="@{/feed}" class="nav-link px-2 text-secondary">Feed</a></li>
-                <li><a th:href="@{/admin_panel}" class="nav-link px-2 text-white">Admin's tools</a></li>
+                <li th:if="${isAdmin}"><a th:href="@{/admin_panel}" class="nav-link px-2 text-white">Admin's tools</a></li>
                 <li><a href="/feed" class="nav-link px-2 text-white">All</a></li>
                 <li><a href="/feed?sortedBy=books" class="nav-link px-2 text-white">Books</a></li>
                 <li><a href="/feed?sortedBy=games" class="nav-link px-2 text-white">Games</a></li>

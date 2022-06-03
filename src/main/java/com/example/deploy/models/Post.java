@@ -3,10 +3,8 @@ package com.example.deploy.models;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.*;
-import java.text.DecimalFormat;
 import java.util.Collection;
 import java.util.Date;
 
@@ -61,11 +59,11 @@ public class Post {
             rate += rateFromCollection.getRate();
         }
         rate /= rateCollection.size();
-        return roundAvoid(rate,1);
+        return roundAvoid(rate);
     }
 
-    private static double roundAvoid(double value, int places) {
-        double scale = Math.pow(10, places);
+    private static double roundAvoid(double value) {
+        double scale = Math.pow(10, 1);
         return Math.round(value * scale) / scale;
     }
 }

@@ -47,6 +47,12 @@ public class ProfileController {
         else {
             model.addAttribute("isEditEnabled", false);
         }
+        if (currentUser.getRole().equals(Role.ADMIN)) {
+            model.addAttribute("isAdmin", true);
+        }
+        else {
+            model.addAttribute("isAdmin", false);
+        }
         model.addAttribute("user", UserMapper.mapEntityToProfileDTO(userService.getUserByUsername(username)));
         model.addAttribute("posts", PostMapper.mapEntityToProfileDTO(postService.getAllPostsByAuthorId(user_id)));
         return "profile";
